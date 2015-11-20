@@ -4,7 +4,7 @@ From Data Science Track : Getting and Cleaning Data by Jeff Leek
 My Project
 ----------
 Start with file: run_analysis.R
-Data is loaded from folder (available from above URL): ./UCI HAR Dataset/
+Data is loaded from folder (available from URL below): ./UCI HAR Dataset/
 See: CodeBook.md for description of the internal workings of run_analysis.R
 
 Project Requirements
