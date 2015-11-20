@@ -10,8 +10,7 @@
 # Data https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 
-##Merges the training and the test sets to create one data set.
-
+# Appropriately labels the data set with descriptive variable names. 
 # Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
 subjectTest <- read.table("UCI HAR Dataset/test/subject_test.txt",col.names="Person")
 head(subjectTest)
@@ -23,6 +22,7 @@ test_X <- read.table("UCI HAR Dataset/test/X_test.txt")
 head(test_X, n=1)
 
 
+# Appropriately labels the data set with descriptive variable names. 
 # Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
 subjectTrain <- read.table("UCI HAR Dataset/train/subject_train.txt",col.names="Person")
 head(subjectTrain)
@@ -35,19 +35,26 @@ head(train_X, n=1)
 
 full_X <- rbind(test_X, train_X)
 full_Y <- rbind(test_Y, train_Y)
+
+#install.packages("dplyr")
+library(dplyr)
+#two <- tbl_df(one)
+#two <- mutate(two, Description = ifelse(Label==1, "Walking", ifelse (Label==2, "Up Stairs", ifelse(Label==3, "Down Stairs", ifelse(Label==4, "Sitting", ifelse(Label == 5 , "Standing",     ifelse(Label == 6, "Laying", Label)))))))
+
+
+## Merges the training and the test sets to create one data set.
 full_subject <- rbind(subjectTest, subjectTrain)
-
 one <- cbind(full_subject, full_Y)
+one <- tbl_df(one)
+one <- mutate(one, Description = ifelse(Label==1, "Walking", ifelse (Label==2, "Up Stairs", ifelse(Label==3, "Down Stairs", ifelse(Label==4, "Sitting", ifelse(Label == 5 , "Standing",     ifelse(Label == 6, "Laying", Label)))))))
 one <- cbind(one, full_X) # final
-
+one <- tbl_df(one)
+#one
 rm(test_X, test_Y, train_X, train_Y, subjectTest, subjectTrain) #cleanup
+#head(one, n=1)
 
 
 #Extracts only the measurements on the mean and standard deviation for each measurement. 
-
-#Uses descriptive activity names to name the activities in the data set
-
-#Appropriately labels the data set with descriptive variable names. 
 
 #From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
